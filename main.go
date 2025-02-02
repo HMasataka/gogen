@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"log/slog"
 	"os"
 	"path"
 	"strings"
@@ -28,13 +29,13 @@ type Enums struct {
 	Data    []Enum `json:"data"`
 }
 
-func readTemplate(path string) *template.Template {
+func readTemplate(path string) (*template.Template, error) {
 	b, err := gofiles.ReadFile(path)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	return template.Must(template.New("").Parse(string(b)))
+	return template.Must(template.New("").Parse(string(b))), nil
 }
 
 func readEnums(path string) ([]Enums, error) {
@@ -52,31 +53,47 @@ func readEnums(path string) ([]Enums, error) {
 	return enums, nil
 }
 
+func getLogger() *slog.Logger {
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+
+	return logger
+}
+
 func main() {
+	logger := getLogger()
+
 	enums, err := readEnums(ENUM_FILE_NAME)
 	if err != nil {
-		panic(err)
+		logger.Error("read enum files", slog.Any("error", err))
+		os.Exit(1)
 	}
 
 	fmt.Println(enums)
 
 	for _, e := range enums {
 		if err := os.Mkdir(e.Package, 0755); err != nil {
-			panic(err)
+			logger.Error("create directory", slog.Any("error", err))
+			os.Exit(1)
 		}
 
 		path := path.Join(e.Package, fmt.Sprintf("%s.go", strings.ToLower(e.Type)))
 
 		f, err := gofiles.CreateWriteFile(path)
 		if err != nil {
-			panic(err)
+			logger.Error("create file", slog.Any("error", err))
+			os.Exit(1)
 		}
 		defer f.Close()
 
-		enumTemplate := readTemplate(TEMPLATE_FILE_NAME)
+		enumTemplate, err := readTemplate(TEMPLATE_FILE_NAME)
+		if err != nil {
+			logger.Error("read template", slog.Any("error", err))
+			os.Exit(1)
+		}
 
 		if err := enumTemplate.Execute(f, e); err != nil {
-			panic(err)
+			logger.Error("execute template", slog.Any("error", err))
+			os.Exit(1)
 		}
 	}
 }

@@ -13,7 +13,8 @@ import (
 )
 
 const (
-	ENUM_FILE_NAME = "enums.json"
+	ENUM_FILE_NAME     = "enums.json"
+	TEMPLATE_FILE_NAME = "main.tmpl"
 )
 
 type Enum struct {
@@ -63,7 +64,7 @@ func main() {
 		}
 		defer f.Close()
 
-		enumTemplate := readTemplate("main.tmpl")
+		enumTemplate := readTemplate(TEMPLATE_FILE_NAME)
 
 		if err := enumTemplate.Execute(f, e); err != nil {
 			panic(err)

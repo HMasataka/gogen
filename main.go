@@ -37,15 +37,24 @@ func readTemplate(path string) *template.Template {
 	return template.Must(template.New("").Parse(string(b)))
 }
 
-func main() {
+func readEnums(path string) ([]Enums, error) {
 	var enums []Enums
 
-	enumBytes, err := gofiles.ReadFile(ENUM_FILE_NAME)
+	enumBytes, err := gofiles.ReadFile(path)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	if err := json.Unmarshal(enumBytes, &enums); err != nil {
+		return nil, err
+	}
+
+	return enums, nil
+}
+
+func main() {
+	enums, err := readEnums(ENUM_FILE_NAME)
+	if err != nil {
 		panic(err)
 	}
 

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"os"
+	"path"
 	"strings"
 )
 
@@ -37,6 +38,10 @@ func readTemplate(path string) *template.Template {
 	return template.Must(template.New("").Parse(string(b)))
 }
 
+func createFile(path string) (*os.File, error) {
+	return os.OpenFile(path, os.O_CREATE|os.O_WRONLY, 0644)
+}
+
 func main() {
 	var enums []Enums
 
@@ -56,7 +61,9 @@ func main() {
 			panic(err)
 		}
 
-		f, err := os.Create("./" + e.Package + "/" + strings.ToLower(e.Type) + ".go")
+		path := path.Join(e.Package, fmt.Sprintf("%s.go", strings.ToLower(e.Type)))
+
+		f, err := createFile(path)
 		if err != nil {
 			panic(err)
 		}

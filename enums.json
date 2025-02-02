@@ -1,0 +1,38 @@
+[
+  {
+    "type": "CITY",
+    "package": "types",
+    "data": [
+      {
+        "id": "TYO",
+        "name": "Tokyo"
+      },
+      {
+        "id": "NYC",
+        "name": "New York"
+      },
+      {
+        "id": "LDN",
+        "name": "London"
+      }
+    ]
+  },
+  {
+    "type": "COUNTRY",
+    "package": "enums",
+    "data": [
+      {
+        "id": "JPN",
+        "name": "Japan"
+      },
+      {
+        "id": "US",
+        "name": "United States"
+      },
+      {
+        "id": "UK",
+        "name": "United Kingdom"
+      }
+    ]
+  }
+]

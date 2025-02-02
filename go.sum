@@ -1,2 +1,6 @@
 github.com/HMasataka/gofiles v0.0.0-20250202111331-891a15f40257 h1:sZ6Sc4ITcR5FajAbzCNkJM7e8DixRhhEPfbNPs1/22E=
 github.com/HMasataka/gofiles v0.0.0-20250202111331-891a15f40257/go.mod h1:zeSP9F2yN6voH7RrzRvGQK4bzwgFruzKCXUxDgXJYL8=
+github.com/HMasataka/gofiles v0.0.0-20250202115319-2359694626eb h1:prwNhIIlvLi8K+SnKwF/OdWEiVbcJcUbVEvoIFXWBOY=
+github.com/HMasataka/gofiles v0.0.0-20250202115319-2359694626eb/go.mod h1:zeSP9F2yN6voH7RrzRvGQK4bzwgFruzKCXUxDgXJYL8=
+github.com/HMasataka/gofiles v0.0.0-20250202115844-2bb94d6d5e03 h1:neCSlJgYBlzqUiwjrqDOPzYoVkuRtDk9YlFb3efC8Bk=
+github.com/HMasataka/gofiles v0.0.0-20250202115844-2bb94d6d5e03/go.mod h1:zeSP9F2yN6voH7RrzRvGQK4bzwgFruzKCXUxDgXJYL8=

@@ -71,7 +71,7 @@ func main() {
 	fmt.Println(enums)
 
 	for _, e := range enums {
-		if err := os.Mkdir(e.Package, 0755); err != nil {
+		if err := gofiles.CreateDirectoryIfNotExist(e.Package); err != nil {
 			logger.Error("create directory", slog.Any("error", err))
 			os.Exit(1)
 		}

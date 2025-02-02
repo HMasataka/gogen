@@ -8,6 +8,8 @@ import (
 	"os"
 	"path"
 	"strings"
+
+	"github.com/HMasataka/gofiles"
 )
 
 const (
@@ -25,12 +27,8 @@ type Enums struct {
 	Data    []Enum `json:"data"`
 }
 
-func readFile(path string) ([]byte, error) {
-	return os.ReadFile(path)
-}
-
 func readTemplate(path string) *template.Template {
-	b, err := readFile(path)
+	b, err := gofiles.ReadFile(path)
 	if err != nil {
 		panic(err)
 	}
@@ -38,14 +36,10 @@ func readTemplate(path string) *template.Template {
 	return template.Must(template.New("").Parse(string(b)))
 }
 
-func createFile(path string) (*os.File, error) {
-	return os.OpenFile(path, os.O_CREATE|os.O_WRONLY, 0644)
-}
-
 func main() {
 	var enums []Enums
 
-	enumBytes, err := readFile(ENUM_FILE_NAME)
+	enumBytes, err := gofiles.ReadFile(ENUM_FILE_NAME)
 	if err != nil {
 		panic(err)
 	}
@@ -63,7 +57,7 @@ func main() {
 
 		path := path.Join(e.Package, fmt.Sprintf("%s.go", strings.ToLower(e.Type)))
 
-		f, err := createFile(path)
+		f, err := gofiles.CreateWriteFile(path)
 		if err != nil {
 			panic(err)
 		}

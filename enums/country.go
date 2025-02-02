@@ -2,25 +2,23 @@
 
 package enums
 
-
 type COUNTRY int
 
-
 const (
-        JPN COUNTRY = iota
-        US COUNTRY = iota
-        UK COUNTRY = iota
+	JPN COUNTRY = iota
+	US  COUNTRY = iota
+	UK  COUNTRY = iota
 )
 
 func (e COUNTRY) String() string {
-    switch e {
+	switch e {
 	case JPN:
-		return &#34;Japan&#34;
+		return "Japan"
 	case US:
-		return &#34;United States&#34;
+		return "United States"
 	case UK:
-		return &#34;United Kingdom&#34;
-    default:
-        return "Unknown COUNTRY"
-    }
+		return "United Kingdom"
+	default:
+		return "Unknown COUNTRY"
+	}
 }

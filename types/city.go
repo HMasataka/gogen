@@ -2,25 +2,23 @@
 
 package types
 
-
 type CITY int
 
-
 const (
-        TYO CITY = iota
-        NYC CITY = iota
-        LDN CITY = iota
+	TYO CITY = iota
+	NYC CITY = iota
+	LDN CITY = iota
 )
 
 func (e CITY) String() string {
-    switch e {
+	switch e {
 	case TYO:
-		return &#34;Tokyo&#34;
+		return "Tokyo"
 	case NYC:
-		return &#34;New York&#34;
+		return "New York"
 	case LDN:
-		return &#34;London&#34;
-    default:
-        return "Unknown CITY"
-    }
+		return "London"
+	default:
+		return "Unknown CITY"
+	}
 }

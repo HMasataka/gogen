@@ -16,7 +16,7 @@ func (e {{ $type }}) String() string {
     switch e {
     {{- range $i, $d := .Data }}
 	case {{ $d.Id }}:
-		return {{ printf "%q" $d.Name }}
+		return "{{ printf "%v" $d.Name }}"
     {{- end }}
     default:
         return "Unknown {{ $type }}"

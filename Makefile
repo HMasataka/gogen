@@ -2,7 +2,7 @@
 .DEFAULT_GOAL := help
 
 gen: ## Generate code
-	go run cmd/main.go
+	go run _examples/main.go
 	go fmt ./...
 
 help: ## Show options

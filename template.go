@@ -5,6 +5,7 @@ import (
 	"html/template"
 
 	"github.com/HMasataka/gofiles"
+	"github.com/Masterminds/sprig/v3"
 )
 
 type ReadTemplateOptions struct {
@@ -27,5 +28,5 @@ func ReadTemplate(path string, setters ...ReadTemplateOption) (*template.Templat
 		return nil, err
 	}
 
-	return template.Must(template.New(opts.Name).Parse(string(b))), nil
+	return template.Must(template.New(opts.Name).Funcs(sprig.FuncMap()).Parse(string(b))), nil
 }

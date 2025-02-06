@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path"
@@ -17,10 +18,36 @@ const (
 	TEMPLATE_FILE_NAME = "main.tmpl"
 )
 
+type Enum struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type Enums struct {
+	Type    string `json:"type"`
+	Package string `json:"package"`
+	Data    []Enum `json:"data"`
+}
+
+func readEnums(path string) ([]Enums, error) {
+	var enums []Enums
+
+	enumBytes, err := gofiles.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := json.Unmarshal(enumBytes, &enums); err != nil {
+		return nil, err
+	}
+
+	return enums, nil
+}
+
 func main() {
 	logger := gogen.GetTextLogger()
 
-	enums, err := gogen.ReadEnums(ENUM_FILE_NAME)
+	enums, err := readEnums(ENUM_FILE_NAME)
 	if err != nil {
 		logger.Error("read enum files", slog.Any("error", err))
 		os.Exit(1)

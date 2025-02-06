@@ -15,7 +15,7 @@ import (
 
 const (
 	ENUM_FILE_NAME     = "enums.json"
-	TEMPLATE_FILE_NAME = "main.tmpl"
+	TEMPLATE_FILE_NAME = "templates/example.tmpl"
 )
 
 type Enum struct {

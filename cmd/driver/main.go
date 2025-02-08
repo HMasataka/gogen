@@ -17,6 +17,8 @@ type Options struct {
 	Output          string `short:"o" long:"output" description:"Output file name" required:"true"`
 	OutputDirectory string `short:"d" long:"output-dir" description:"Output directory path" default:"outputs"`
 	Template        string `short:"t" long:"template" description:"Input template file path" required:"true"`
+	Package         string `short:"p" long:"package" description:"Output package name" default:"driver"`
+	Entity          string `short:"e" long:"entity" description:"entity name" required:"true"`
 }
 
 type Data struct {
@@ -55,8 +57,8 @@ func main() {
 	}
 
 	data := Data{
-		Package:    "driver",
-		EntityName: "user",
+		Package:    opts.Package,
+		EntityName: opts.Entity,
 	}
 
 	if err := template.Execute(f, data); err != nil {

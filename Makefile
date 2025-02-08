@@ -1,7 +1,7 @@
 .PHONY: gen help
 .DEFAULT_GOAL := help
 
-gen: ## Generate code
+example: ## Generate example code
 	go run _examples/main.go
 	go fmt ./...
 
